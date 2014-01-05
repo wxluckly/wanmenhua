@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+  <div class="panel-heading">新建订单</div>
+  <%= form_for [:admin, @order] do |f| %>
+  <table class="table">
+    <tr>
+      <td>业务员姓名：</td>
+      <td><%= @order.user.name %></td>
+      <td>付款情况：</td>
+      <td><%= f.text_field :status %></td>
+    </tr>
+    <%= f.fields_for :client do |f_c| %>
+    <tr>
+      <td>手机号：</td>
+      <td><%= f_c.telephone_field :cellphone %></td>
+      <td>客户姓名：</td>
+      <td><%= f_c.text_field :name %></td>
+    </tr>
+    <tr>
+      <td>年龄：</td>
+      <td><%= f_c.text_field :age %></td>
+      <td>性别：</td>
+      <td>
+        <%= f_c.radio_button(:gender, "male") %>
+        <%= label_tag(:order_client_gender_male, "男") %>
+        <%= f_c.radio_button(:gender, "female") %>
+        <%= label_tag(:order_client_gender_female, "女") %>
+      </td>
+    </tr>
+    <tr>
+      <td>邮箱：</td>
+      <td><%= f_c.text_field :email %></td>
+      <td>地址：</td>
+      <td><%= f_c.text_field :address %></td>
+    </tr>
+    <tr>
+      <td>备考信息：</td>
+      <td colspan="3"><%= f_c.text_area :exam_info %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td>备注：</td>
+      <td colspan="3"><%= f.text_area :remark, cols: 120, rows: 10 %></td>
+    </tr>
+    <% if current_user.admin? %>
+    <tr>
+      <td>业务员提成发放状态：</td>
+      <td colspan="3">
+        <%= f.radio_button(:is_performed, true) %>
+        <%= label_tag(:order_is_performed_true, "是") %>
+        <%= f.radio_button(:is_performed, false) %>
+        <%= label_tag(:order_is_performed_false, "否") %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <center><%= f.submit '提交', class:"btn btn-primary" %></center>
+  <% end %>
+</div>

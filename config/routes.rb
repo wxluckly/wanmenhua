@@ -4,6 +4,6 @@ Wanmenhua::Application.routes.draw do
 
   namespace "admin" do
     root :to => "welcome#index"
-    resources :order
+    resources :orders
   end
 end

@@ -1,3 +1,7 @@
+<ol class="breadcrumb">
+  <li><%= link_to "订单列表", admin_orders_path %></li>
+  <li class="active">新建订单</li>
+</ol>
 <div class="panel panel-default">
   <div class="panel-heading">新建订单</div>
   <%= form_for [:admin, @order] do |f| %>

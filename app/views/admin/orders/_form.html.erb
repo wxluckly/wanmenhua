@@ -1,0 +1,63 @@
+<% if @client.errors.present? %><div class="alert alert-danger"><%= @client.errors.full_messages %></div><% end %>
+<% if @order.errors.present? %><div class="alert alert-danger"><%= @order.errors.full_messages %></div><% end %>
+<%= form_for [:admin, @order] do |f| %>
+<table class="table table-bordered">
+  <tr>
+    <td>业务员姓名：</td>
+    <td><%= @order.user.name %></td>
+    <td>付款情况：</td>
+    <td><%= f.text_field :status, class: "form-control" %></td>
+  </tr>
+  <%= f.fields_for :client, @client do |f_c| %>
+  <tr>
+    <td>手机号：</td>
+    <td><%= f_c.telephone_field :cellphone, class: "form-control" %></td>
+    <td>客户姓名：</td>
+    <td><%= f_c.text_field :name, class: "form-control" %></td>
+  </tr>
+  <tr>
+    <td>年龄：</td>
+    <td><%= f_c.text_field :age, class: "form-control" %></td>
+    <td>性别：</td>
+    <td>
+      <%= label_tag nil, class: "checkbox-inline" do %>
+      <%= f_c.radio_button(:gender, "male") %> 男
+      <% end %>
+      <%= label_tag nil, class: "checkbox-inline" do %>
+      <%= f_c.radio_button(:gender, "female") %> 女
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>邮箱：</td>
+    <td><%= f_c.text_field :email, class: "form-control" %></td>
+    <td>地址：</td>
+    <td><%= f_c.text_field :address, class: "form-control" %></td>
+  </tr>
+  <tr>
+    <td>备考信息：</td>
+    <td colspan="3"><%= f_c.text_area :exam_info, class: "form-control" %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <td>备注：</td>
+    <td colspan="3"><%= f.text_area :remark, class: "form-control" %></td>
+  </tr>
+  <% if current_user.admin? %>
+  <tr>
+    <td>提成发放状态：</td>
+    <td colspan="3">
+      <%= label_tag nil, class: "checkbox-inline" do %>
+      <%= f.radio_button(:is_performed, true) %> 已发放
+      <% end %>
+      <%= label_tag nil, class: "checkbox-inline" do %>
+      <%= f.radio_button(:is_performed, false) %> 未发放
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% if params[:action] != "show" %>
+<center><%= f.submit '提交', class:"btn btn-primary" %></center>
+<% end %>
+<% end %>

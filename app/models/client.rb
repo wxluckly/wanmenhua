@@ -6,6 +6,13 @@ class Client < ActiveRecord::Base
   has_many :orders
   
   # validations ...............................................................
+  validates :cellphone, uniqueness: true
+  validates :name, presence: true
+  validates :age, presence: true
+  validates :gender, presence: true
+  validates :address, presence: true
+  validates :email, presence: true
+
   # callbacks .................................................................
   # scopes ....................................................................
   # additional config .........................................................

@@ -8,11 +8,23 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def create
-    @order = current_user.orders.create(order_params)
-    @client = Client.find_or_initialize_by(client_params)
-    @client.orders << @order
-    @client.save
-    redirect_to admin_orders_path
+    @client = Client.create_or_initialize_by(client_params)
+    @order = current_user.orders.create(order_params.merge{client_id: @client.id})
+    if @order.save
+      redirect_to admin_orders_path
+    else
+      render action: "new"
+    end
+  end
+
+  def edit
+    @order = current_user.orders.find(params[:id])
+    @client = @order.client
+  end
+
+  def show
+    @order = current_user.orders.find(params[:id])
+    @client = @order.client
   end
 
   private

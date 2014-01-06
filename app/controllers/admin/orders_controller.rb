@@ -8,8 +8,8 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def create
-    @client = Client.create_or_initialize_by(client_params)
-    @order = current_user.orders.create(order_params.merge{client_id: @client.id})
+    @client = Client.find_or_create_by(client_params)
+    @order = current_user.orders.create(order_params.merge({client_id: @client.id}))
     if @order.save
       redirect_to admin_orders_path
     else

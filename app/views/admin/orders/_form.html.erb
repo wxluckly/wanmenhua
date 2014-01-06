@@ -1,4 +1,4 @@
-<% if @client.errors.present? %><div class="alert alert-danger"><%= @client.errors.full_messages %></div><% end %>
+<% if @client.try(:errors).present? %><div class="alert alert-danger"><%= @client.errors.full_messages %></div><% end %>
 <% if @order.errors.present? %><div class="alert alert-danger"><%= @order.errors.full_messages %></div><% end %>
 <%= form_for [:admin, @order] do |f| %>
 <table class="table table-bordered">

@@ -61,3 +61,20 @@
 <center><%= f.submit '提交', class:"btn btn-primary" %></center>
 <% end %>
 <% end %>
+<% content_for :js do %>
+<script type="text/javascript">
+  $("#order_client_cellphone").change(function() {
+    $.get("/ajax/get_client_by_cellphone", {
+      cellphone: $(this).val()
+    },function(data){
+      $("#order_client_exam_info").val(data.exam_info);
+      $("#order_client_name").val(data.name);
+      $("#order_client_age").val(data.age);
+      $("#order_client_email").val(data.email);
+      $("#order_client_address").val(data.address);
+      $("input[name='order[client][gender]'][value='" + data.gender + "']").attr("checked",true);
+    }, "json");
+  });
+  
+</script>
+<% end %>

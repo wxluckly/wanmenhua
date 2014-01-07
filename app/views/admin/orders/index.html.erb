@@ -7,6 +7,7 @@
       <tr class="active">
         <th>业务员姓名</th>
         <th>客户姓名</th>
+        <th>客户电话</th>
         <th>订单时间</th>
         <th>付款状态</th>
         <th>操作</th>
@@ -17,10 +18,17 @@
       <tr>
         <td><%= order.user.name %></td>
         <td><%= order.client.name %></td>
+        <td><%= order.client.cellphone %></td>
         <td><%= order.created_at.to_date %></td>
         <td><%= order.status %></td>
-        <td><%= link_to "查看", [:admin, order] %></td>
-      </tr>
+        <td>
+          <%= if current_user.admin? 
+            link_to "编辑", edit_admin_order_path(order)
+          else
+            link_to "查看", [:admin, order] 
+            end %>
+          </td>
+        </tr>
       </a>
       <% end %>
     </tbody>

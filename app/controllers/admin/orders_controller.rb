@@ -1,6 +1,10 @@
 class Admin::OrdersController < Admin::ApplicationController
   def index
-    @orders = current_user.orders.paginate(page: params[:page])
+    if current_user.admin?
+      @orders = Order.order("id desc").paginate(page: params[:page])
+    else
+      @orders = current_user.orders.order("id desc").paginate(page: params[:page])
+    end
   end
 
   def new
@@ -16,10 +20,20 @@ class Admin::OrdersController < Admin::ApplicationController
       render action: "new"
     end
   end
-
+ 
   def edit
     @order = current_user.orders.find(params[:id])
     @client = @order.client
+  end
+
+  def update
+    @order = current_user.orders.find(params[:id])
+    @client = @order.client
+    if @client.update(client_params) and @order.update(order_params)
+      redirect_to admin_orders_path
+    else
+      render action: "edit"
+    end
   end
 
   def show

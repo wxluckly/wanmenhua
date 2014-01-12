@@ -11,5 +11,6 @@ gem 'will_paginate-bootstrap'
 gem 'pry'
 gem 'quiet_assets'
 gem 'sass-rails'
+gem 'uglifier'
 
 gem 'unicorn'

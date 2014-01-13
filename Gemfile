@@ -8,9 +8,15 @@ gem "devise"
 gem 'jquery-rails', '2.2.1'
 gem 'anjlab-bootstrap-rails', '~> 3.0.3.0', :require => 'bootstrap-rails'
 gem 'will_paginate-bootstrap'
-gem 'pry'
 gem 'quiet_assets'
 gem 'sass-rails'
 gem 'uglifier'
 
-gem 'unicorn'
+group :development do
+  gem 'pry'
+  gem "better_errors"
+end
+
+group :production do
+  gem 'unicorn'
+end

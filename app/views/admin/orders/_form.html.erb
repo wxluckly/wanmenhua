@@ -50,23 +50,34 @@
     <td>备注：</td>
     <td colspan="3"><%= f.text_area :remark, class: "form-control" %></td>
   </tr>
-  <% if current_user.admin? %>
+</table>
+
+<% if current_user.admin? %>
+<table class="table table-bordered">
   <tr>
-    <td>提成发放状态：</td>
-    <td colspan="3">
+    <td>订单确认状态：</td>
+    <td>
       <%= label_tag nil, class: "checkbox-inline" do %>
-      <%= f.radio_button(:is_performed, true) %> 已发放
+      <%= f.radio_button(:is_performed, false) %> 未确认
       <% end %>
       <%= label_tag nil, class: "checkbox-inline" do %>
-      <%= f.radio_button(:is_performed, false) %> 未发放
+      <%= f.radio_button(:is_performed, true) %> 已确认
+      <% end %>
+    </td>
+    <td>提成发放状态（￥）：</td>
+    <td>
+      <%= label_tag nil, class: "checkbox-inline" do %>
+      <%= f.radio_button(:is_paid, false) %> 未发放
+      <% end %>
+      <%= label_tag nil, class: "checkbox-inline" do %>
+      <%= f.radio_button(:is_paid, true) %> 已发放
       <% end %>
     </td>
   </tr>
-  <% end %>
 </table>
-<% if params[:action] != "show" %>
-<center><%= f.submit '提交', class:"btn btn-primary" %></center>
 <% end %>
+
+<% if params[:action] != "show" %><center><%= f.submit '提交', class:"btn btn-primary" %></center><% end %>
 <% end %>
 <% content_for :js do %>
 <script type="text/javascript">

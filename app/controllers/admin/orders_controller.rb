@@ -22,12 +22,12 @@ class Admin::OrdersController < Admin::ApplicationController
   end
  
   def edit
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.admin? ? Order.find(params[:id]) : current_user.orders.find(params[:id])
     @client = @order.client
   end
 
   def update
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.admin? ? Order.find(params[:id]) : current_user.orders.find(params[:id])
     @client = @order.client
     if @client.update(client_params) and @order.update(order_params)
       redirect_to admin_orders_path
@@ -43,7 +43,7 @@ class Admin::OrdersController < Admin::ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:status, :remark)
+    params.require(:order).permit(:status, :remark, :is_paid, :is_performed)
   end
 
   def client_params

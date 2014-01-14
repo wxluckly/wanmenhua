@@ -11,6 +11,8 @@
         <th>客户电话</th>
         <th>订单时间</th>
         <th>付款状态</th>
+        <th>VIP号</th>
+        <th>班次</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -22,6 +24,8 @@
         <td><%= order.client.cellphone %></td>
         <td><%= order.created_at.to_date %></td>
         <td><%= order.status_chs %></td>
+        <td><%= order.card.try(:sn) %></td>
+        <td><%=  %></td>
         <td>
           <%= current_user.admin? ? (link_to "编辑", edit_admin_order_path(order)) : (link_to "查看", [:admin, order]) %>
         </td>

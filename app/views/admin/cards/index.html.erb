@@ -1,0 +1,30 @@
+<ol class="breadcrumb">
+  <li class="active">订单列表</li>
+</ol>
+<div class="panel panel-default">
+  <table class="table">
+    <thead>
+      <tr class="active">
+        <th>VIP卡号</th>
+        <th>创建时间</th>
+        <th>客户姓名</th>
+        <th>客户电话</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cards.each do |card| %>
+      <tr>
+        <td><%= card.sn %></td>
+        <td><%= card.created_at.to_date %></td>
+        <td><%=  %></td>
+        <td><%=  %></td>
+        <td>
+          <%= current_user.admin? ? (link_to "编辑", edit_admin_card_path(card)) : (link_to "查看", [:admin, card]) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @orders, :renderer => BootstrapPagination::Rails %>

@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   # relationships .............................................................
   belongs_to :client
   belongs_to :user
+  has_one :card
 
   # validations ...............................................................
   validates :status, presence: true

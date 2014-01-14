@@ -23,14 +23,9 @@
         <td><%= order.created_at.to_date %></td>
         <td><%= order.status %></td>
         <td>
-          <%= if current_user.admin? 
-            link_to "编辑", edit_admin_order_path(order)
-          else
-            link_to "查看", [:admin, order] 
-            end %>
-          </td>
-        </tr>
-      </a>
+          <%= current_user.admin? ? (link_to "编辑", edit_admin_order_path(order)) : (link_to "查看", [:admin, order]) %>
+        </td>
+      </tr>
       <% end %>
     </tbody>
   </table>

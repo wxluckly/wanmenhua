@@ -6,7 +6,14 @@
     <td>业务员姓名：</td>
     <td><%= @order.user.name %></td>
     <td>付款情况：</td>
-    <td><%= f.text_field :status, class: "form-control" %></td>
+    <td>
+      <%= label_tag nil, class: "checkbox-inline" do %>
+      <%= f.radio_button(:status, "none") %> 未付款
+      <% end %>
+      <%= label_tag nil, class: "checkbox-inline" do %>
+      <%= f.radio_button(:status, "full") %> 已付款
+      <% end %>
+    </td>
   </tr>
   <%= f.fields_for :client, @client do |f_c| %>
   <tr>

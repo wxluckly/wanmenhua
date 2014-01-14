@@ -19,8 +19,8 @@
       </div>
       <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav">
-          <li <%= sanitize 'class="active"' if current_page?(admin_orders_path)%> ><%= link_to "订单管理", admin_orders_path %></li>
-          <li <%= sanitize 'class="active"' if current_page?(admin_cards_path)%> ><%= link_to "VIP卡管理", admin_cards_path %></li>
+          <li <%= sanitize 'class="active"' if params[:controller] == "admin/orders" %> ><%= link_to "订单管理", admin_orders_path %></li>
+          <li <%= sanitize 'class="active"' if params[:controller] == "admin/cards" %> ><%= link_to "VIP卡管理", admin_cards_path %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <%= image_tag "admin_logo.png", height: "50" %>

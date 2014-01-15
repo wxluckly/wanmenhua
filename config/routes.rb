@@ -4,6 +4,8 @@ Wanmenhua::Application.routes.draw do
 
   namespace "ajax" do
     get "get_client_by_cellphone"
+    post "set_order_squad"
+    post "set_order_card_sn"
   end
 
   namespace "admin" do

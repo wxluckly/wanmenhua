@@ -9,6 +9,7 @@ class Admin::OrdersController < Admin::ApplicationController
 
   def new
     @order = current_user.orders.new
+    @squads = Squad.select("id, name")
   end
 
   def create
@@ -24,6 +25,7 @@ class Admin::OrdersController < Admin::ApplicationController
   def edit
     @order = current_user.admin? ? Order.find(params[:id]) : current_user.orders.find(params[:id])
     @client = @order.client
+    @squads = Squad.select("id, name")
   end
 
   def update

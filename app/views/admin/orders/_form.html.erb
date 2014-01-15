@@ -1,6 +1,7 @@
 <% if @client.try(:errors).present? %><div class="alert alert-danger"><%= @client.errors.full_messages %></div><% end %>
 <% if @order.errors.present? %><div class="alert alert-danger"><%= @order.errors.full_messages %></div><% end %>
-<%= form_for [:admin, @order] do |f| %>
+<%= form_for [:admin, @order], html: { class: "form-horizontal" } do |f| %>
+
 <table class="table table-bordered">
   <tr>
     <td>业务员姓名：</td>
@@ -52,6 +53,19 @@
   </tr>
 </table>
 
+<table class="table table-bordered">
+  <tr>
+    <td>VIP卡绑定：</td>
+    <td><%= text_field_tag :card_sn_inputer, @order.card.try(:sn), class: "form-control" %></td>
+    <td>班级设置：</td>
+    <td><%= select_tag :squad_id_selector, options_from_collection_for_select(@squads, "id", "name", @order.card.try(:squad_id)), include_blank: true, class: 'form-control' %></td>
+  </tr>
+</table>
+<div class="alert alert-danger fade in">
+  <h4>出错了</h4>
+  <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+</div>
+
 <% if current_user.admin? %>
 <table class="table table-bordered">
   <tr>
@@ -78,9 +92,11 @@
 <% end %>
 
 <% if params[:action] != "show" %><center><%= f.submit '提交', class:"btn btn-primary" %></center><% end %>
+
 <% end %>
 <% content_for :js do %>
 <script type="text/javascript">
+  // 自动回填客户信息
   $("#order_client_cellphone").change(function() {
     $.get("/ajax/get_client_by_cellphone", {
       cellphone: $(this).val()
@@ -93,5 +109,29 @@
       $("input[name='order[client][gender]'][value='" + data.gender + "']").attr("checked",true);
     }, "json");
   });
+
+  // 设置VIP号
+  $("#card_sn_inputer").keyup(function() {
+    var $this = $(this);
+    if($this.val().length == 5){
+      $.post("/ajax/set_order_card_sn", {
+        order_id: "<%= @order.id %>",
+        card_sn: $this.val()
+      },function(result){
+        $('#card_sn_inputer').popover('show')
+        // alert(result)
+      }, "json");
+    }
+  })
+
+  // 设置班级
+  $("#squad_id_selector").change(function() {
+    $.post("/ajax/set_order_squad", {
+      order_id: "<%= @order.id %>",
+      squad_id: $(this).val()
+    },function(result){
+      alert(result)
+    }, "json");
+  })
 </script>
 <% end %>

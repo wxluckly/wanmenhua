@@ -17,8 +17,8 @@
       <tr>
         <td><%= card.sn %></td>
         <td><%= card.created_at.to_date %></td>
-        <td><%=  %></td>
-        <td><%=  %></td>
+        <td><%= card.order.try(:client).try(:name) %></td>
+        <td><%= card.order.try(:client).try(:cellphone) %></td>
         <td>
           <%= current_user.admin? ? (link_to "编辑", edit_admin_card_path(card)) : (link_to "查看", [:admin, card]) %>
         </td>

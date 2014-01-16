@@ -8,10 +8,11 @@ gem "devise"
 gem "default_value_for", "~> 3.0.0"
 
 gem 'jquery-rails', '2.2.1'
-gem 'anjlab-bootstrap-rails', '~> 3.0.3.0', :require => 'bootstrap-rails'
+gem 'sass-rails'
+gem 'bootstrap-sass', '~> 2.3'
+# gem 'anjlab-bootstrap-rails', '~> 3.0.3.0', :require => 'bootstrap-rails'
 gem 'will_paginate-bootstrap'
 gem 'quiet_assets'
-gem 'sass-rails'
 gem 'uglifier'
 
 group :development do

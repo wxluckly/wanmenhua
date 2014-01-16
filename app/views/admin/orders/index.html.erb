@@ -1,37 +1,37 @@
-<ol class="breadcrumb">
+<ul class="breadcrumb">
   <li class="active">订单列表</li>
-  <%= link_to "新建订单", new_admin_order_path, class: "btn-xs btn-success navbar-right", role: "button" %>
-</ol>
-<div class="panel panel-default">
-  <table class="table">
-    <thead>
-      <tr class="active">
-        <th>业务员姓名</th>
-        <th>客户姓名</th>
-        <th>客户电话</th>
-        <th>订单时间</th>
-        <th>付款状态</th>
-        <th>VIP号</th>
-        <th>班次</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.user.name %></td>
-        <td><%= order.client.name %></td>
-        <td><%= order.client.cellphone %></td>
-        <td><%= order.created_at.to_date %></td>
-        <td><%= order.status_chs %></td>
-        <td><%= order.card.try(:sn) %></td>
-        <td><%= order.card.try(:squad).try(:name) %></td>
-        <td>
-          <%= current_user.admin? ? (link_to "编辑", edit_admin_order_path(order)) : (link_to "查看", [:admin, order]) %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+  <%= link_to "新建订单", new_admin_order_path, class: "btn-mini btn-success pull-right", role: "button" %>
+</ul>
+
+<table class="table table-bordered">
+  <thead>
+    <tr class="active">
+      <th>业务员姓名</th>
+      <th>客户姓名</th>
+      <th>客户电话</th>
+      <th>订单时间</th>
+      <th>付款状态</th>
+      <th>VIP号</th>
+      <th>班次</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.user.name %></td>
+      <td><%= order.client.name %></td>
+      <td><%= order.client.cellphone %></td>
+      <td><%= order.created_at.to_date %></td>
+      <td><%= order.status_chs %></td>
+      <td><%= order.card.try(:sn) %></td>
+      <td><%= order.card.try(:squad).try(:name) %></td>
+      <td>
+        <%= current_user.admin? ? (link_to "编辑", edit_admin_order_path(order)) : (link_to "查看", [:admin, order]) %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= will_paginate @orders, :renderer => BootstrapPagination::Rails %>

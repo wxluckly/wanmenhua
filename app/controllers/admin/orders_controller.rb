@@ -1,7 +1,7 @@
 class Admin::OrdersController < Admin::ApplicationController
   def index
     if current_user.admin?
-      @orders = Order.order("id desc").paginate(page: params[:page])
+      @orders = condition_orders.order("id desc").paginate(page: params[:page])
     else
       @orders = current_user.orders.order("id desc").paginate(page: params[:page])
     end
@@ -50,5 +50,16 @@ class Admin::OrdersController < Admin::ApplicationController
 
   def client_params
     params.require(:order).require(:client).permit(:cellphone, :name, :age, :gender, :email, :address, :exam_info)
+  end
+
+  # 根据查询条件的order结果集
+  def condition_orders
+    orders = Order
+    orders = orders.where(params.slice(:user_id)) if params[:user_id].present?
+    orders = orders.where(is_paid: (params[:is_paid] == "是" ? true : false)) if params[:is_paid].present?
+    orders = orders.where(is_paid: (params[:is_performed] == "是" ? true : false)) if params[:is_performed].present?
+    orders = orders.where("created_at > ?", params[:order_from]) if params[:order_from].present?
+    orders = orders.where("created_at < ?", params[:order_to]) if params[:order_to].present?
+    orders
   end
 end

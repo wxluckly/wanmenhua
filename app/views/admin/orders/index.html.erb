@@ -3,6 +3,22 @@
   <%= link_to "新建订单", new_admin_order_path, class: "btn-mini btn-success pull-right", role: "button" %>
 </ul>
 
+<% if current_user.admin? %>
+<div class="well">
+  <%= form_tag("/admin/orders", :method => 'get', class: "form-search", id: "form-search") do %>
+  <p>
+    业务员：<%= select_tag :user_id, options_from_collection_for_select(User.all, "id", "name", params[:user_id]), include_blank: true %>&nbsp;&nbsp;
+    已审批：<%= select_tag :is_performed, options_for_select(["", "是", "否"], params[:is_performed]) %>&nbsp;&nbsp;
+    已发提成：<%= select_tag :is_paid, options_for_select(["", "是", "否"], params[:is_paid]) %>&nbsp;&nbsp;
+  </p>
+  <p>
+    从何时：<input type="text" id="datepicker_from" name="order_from" value="<%= params[:order_from] %>">&nbsp;&nbsp;
+    到何时：<input type="text" id="datepicker_to" name="order_to" value="<%= params[:order_to] %>">&nbsp;&nbsp;
+  </p>
+  <% end %>
+</div>
+<% end %>
+
 <table class="table table-bordered">
   <thead>
     <tr class="active">
@@ -35,3 +51,36 @@
 </table>
 
 <%= will_paginate @orders, :renderer => BootstrapPagination::Rails %>
+<% content_for :js do %>
+<script type="text/javascript">
+
+  $(function() {
+    $("#datepicker_from").datepicker({
+      dateFormat: "yy-mm-dd",
+      changeYear: true,
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      onClose: function( selectedDate ) {
+        $("#datepicker_to").datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $("#datepicker_to").datepicker({
+      dateFormat: "yy-mm-dd",
+      changeYear: true,
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      onClose: function( selectedDate ) {
+        $("#datepicker_from").datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+    $("#datepicker_to").datepicker( "option", "minDate", $("#datepicker_from").val() );
+    $("#datepicker_from").datepicker( "option", "maxDate", $("#datepicker_to").val() );
+
+    $("#user_id").change(function() { $("#form-search").submit() });
+    $("#is_performed").change(function() { $("#form-search").submit() });
+    $("#is_paid").change(function() { $("#form-search").submit() });
+    $("#datepicker_from").change(function() { $("#form-search").submit() });
+    $("#datepicker_to").change(function() { $("#form-search").submit() });
+  });
+</script>
+<% end %>

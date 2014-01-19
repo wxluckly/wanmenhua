@@ -8,6 +8,7 @@ gem "devise"
 gem "default_value_for", "~> 3.0.0"
 
 gem 'jquery-rails', '2.2.1'
+gem 'jquery-ui-rails'
 gem 'sass-rails'
 gem 'bootstrap-sass', '~> 2.3'
 gem 'will_paginate-bootstrap', '~> 0.2.5'

@@ -17,6 +17,10 @@ gem 'bootstrap-sass', '~> 2.3'
 gem 'will_paginate-bootstrap', '~> 0.2.5'
 gem 'quiet_assets'
 
+# 文件和图片处理
+gem 'carrierwave'
+gem 'mini_magick'
+
 group :development do
   gem 'pry'
   gem "better_errors"

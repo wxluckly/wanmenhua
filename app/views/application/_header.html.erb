@@ -1,9 +1,17 @@
 <div class="top">
   <div class="top-inner">
     <div class="content">
+      <% if user_signed_in? %>
+      <%= link_to '修改信息', edit_user_registration_path %>
+      <span class="line">|</span>
+      <%= link_to '注销', destroy_user_session_path, method: :delete %>
+      <span class="line">|</span>
+      <%= link_to "后台管理系统", admin_root_path %>
+      <% else %>
       <%= link_to '登录', new_user_session_path %>
       <span class="line">|</span>
-      <a href="#">注册</a>
+      <a href="javascript:void(0)">注册</a>
+      <% end %>
     </div>
   </div>
 </div>

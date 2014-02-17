@@ -1,0 +1,26 @@
+<ol class="breadcrumb">
+  <li class="active">网站内容列表</li>
+</ol>
+<div class="panel panel-default">
+  <table class="table">
+    <thead>
+      <tr class="active">
+        <th>内容名称</th>
+        <th>创建时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @infos.each do |info| %>
+      <tr>
+        <td><%= info.title %></td>
+        <td><%= info.created_at.to_date %></td>
+        <td>
+          <%= current_user.admin? ? (link_to "编辑", edit_admin_info_path(info)) : (link_to "查看", [:admin, info]) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @infos, :renderer => BootstrapPagination::Rails %>

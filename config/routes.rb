@@ -18,6 +18,7 @@ Wanmenhua::Application.routes.draw do
   namespace "admin" do
     root :to => "orders#index"
     resources :cards
+    resources :infos
     resources :orders
   end
 end

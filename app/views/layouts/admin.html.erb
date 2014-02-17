@@ -19,6 +19,7 @@
           <ul class="nav">
             <li <%= sanitize 'class="active"' if params[:controller] == "admin/orders" %> ><%= link_to "订单管理", admin_orders_path %></li>
             <li <%= sanitize 'class="active"' if params[:controller] == "admin/cards" %> ><%= link_to "VIP卡管理", admin_cards_path %></li>
+            <li <%= sanitize 'class="active"' if params[:controller] == "admin/infos" %> ><%= link_to "网站内容管理", admin_infos_path %></li>
           </ul>
           <%= image_tag "admin_logo.jpg", class: "pull-right", height: 44 %>
         </div>

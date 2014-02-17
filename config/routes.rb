@@ -1,8 +1,12 @@
 Wanmenhua::Application.routes.draw do
   devise_for :users
-  root 'welcome#index'
+  root 'home#index'
 
+  resources :contact, only: :index
   resources :home, only: :index
+  resources :info
+  resources :news
+  resources :project_description, only: :index
   resources :welcome, only: :index
 
   namespace "ajax" do

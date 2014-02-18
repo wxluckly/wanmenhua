@@ -46,7 +46,7 @@
         <div class="module-text">
           <h3 class="icon1">公司简介</h3>
           <p>公司专业团队多年致力于应试前规划、职业规划等方面的研究。在2010年初至2012年底...</p>
-          <div class="clearfix"><a href="company-profile.shtml" class="btn pull-right">更多...</a></div>
+          <div class="clearfix"><%= link_to "更多...", info_path(2), class: "btn pull-right" %></div>
         </div>
       </li>
       <li>
@@ -54,7 +54,7 @@
         <div class="module-text">
           <h3 class="icon2">应试公关</h3>
           <p>所谓公关，及专业性服务。而应试公关，便是为个人为达到某项专业的能力...</p>
-          <div class="clearfix"><a href="PR-candidate.shtml" class="btn pull-right">更多...</a></div>
+          <div class="clearfix"><%= link_to "更多...", info_path(5), class: "btn pull-right" %></div>
         </div>
       </li>
       <li>
@@ -62,7 +62,7 @@
         <div class="module-text">
           <h3 class="icon3">公司文化</h3>
           <p>公司的发展与个人的发展融为一体 在这里我们不仅仅是完善人才，更创造人才...</p>
-          <div class="clearfix"><a href="company-culture.shtml.shtml" class="btn pull-right">更多...</a></div>
+          <div class="clearfix"><%= link_to "更多...", info_path(3), class: "btn pull-right" %></div>
         </div>
       </li>
       <li class="last-li">
@@ -74,7 +74,7 @@
             <li><a href="#">将来职业规划的重要考试...</a></li>
             <li><a href="#">将来职业规划的重要考试...</a></li>
           </ul>
-          <div class="clearfix"><a href="news-list.shtml" class="btn pull-right">更多...</a></div>
+          <div class="clearfix"><%= link_to "更多...", news_index_path, class: "btn pull-right" %></div>
         </div>
       </li>
     </ul>
@@ -94,7 +94,7 @@
           <div class="saying-text pull-left">
           <p>您的人生会在一次关卡与考验中成功。您的抉择、您在面对自己及家人时的态度，将会决定您所面对的未来、决定您的一生。</p>
           </div>
-          <div class="saying-btn pull-right"><a class="btn pull-right" href="project-description.shtml">了解更多</a></div>
+          <div class="saying-btn pull-right"><%= link_to "了解更多", info_path(1), class: "btn pull-right" %></div>
         </div>
       </div>
       <div class="img-list pull-right">

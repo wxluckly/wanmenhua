@@ -12,35 +12,21 @@
     <div class="content clearfix">
       <div class="left-box pull-left">
         <div class="left-content">
+
+          <% @news.each do |news| %>
           <div class="new-list clearfix">
             <div class="pull-left news-img"><img src="images/news_03.jpg" width="180" height="130" alt="万门华"></div>
             <div class="pull-right news-main-text">
-              <h4><a href="artic.shtml">万门华公关咨询有限公司</a></h4>
+              <h4><%= link_to news.title, news %></h4>
               <div class="news-content news-detai">
-                公司专业团队多年致力于应试前规划、职业规划等方面的研究。 在2010年初至2012年底通过对国内人群学习以及生活的调查，结合国内外社会学家、心理专家、行为学专家及职业规...
+                <%= news.content %>
               </div>
             </div>
           </div>
-
-          <div class="new-list clearfix">
-            <div class="pull-left news-img"><img src="images/news_03.jpg" width="180" height="130" alt="万门华"></div>
-            <div class="pull-right news-main-text">
-              <h4><a href="#">万门华公关咨询有限公司</a></h4>
-              <div class="news-content news-detail">
-                公司专业团队多年致力于应试前规划、职业规划等方面的研究。 在2010年初至2012年底通过对国内人群学习以及生活的调查，结合国内外社会学家、心理专家、行为学专家及职业规...
-              </div>
-            </div>
-          </div>
-
-          <div class="page-box clearfix">
+          <% end %>
+          <div class="page-box clearfix">            
             <ul class="page-ul pull-right">
-              <li class="previous disable"><a href="#"><</a></li>
-              <li class="current"><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li class="page-dotted"><a href="#">...</a></li>
-              <li><a href="#">30</a></li>
-              <li class="next"><a href="#">></a></li>
+              <%= will_paginate @news %>
             </ul>
           </div>
 

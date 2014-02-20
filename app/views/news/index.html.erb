@@ -15,7 +15,7 @@
 
           <% @news.each do |news| %>
           <div class="new-list clearfix">
-            <div class="pull-left news-img"><img src="images/news_03.jpg" width="180" height="130" alt="万门华"></div>
+            <div class="pull-left news-img"><%= image_tag news.image, width: "180", height: "130", alt: "新闻图片"%></div>
             <div class="pull-right news-main-text">
               <h4><%= link_to news.title, news %></h4>
               <div class="news-content news-detai">

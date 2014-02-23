@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require kindeditor
 //= require jquery.ui.datepicker
 //= require jquery.ui.datepicker-zh-TW
 //= require bootstrap

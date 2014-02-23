@@ -19,6 +19,7 @@ Wanmenhua::Application.routes.draw do
     root :to => "orders#index"
     resources :cards
     resources :infos
+    resources :news
     resources :orders
   end
 end

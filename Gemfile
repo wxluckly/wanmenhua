@@ -21,6 +21,9 @@ gem 'quiet_assets'
 gem 'carrierwave'
 gem 'mini_magick'
 
+# 富文本编辑器
+gem 'rails_kindeditor'
+
 group :development do
   gem 'pry'
   gem "better_errors"

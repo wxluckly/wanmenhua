@@ -19,7 +19,7 @@
             <div class="pull-right news-main-text">
               <h4><%= link_to news.title, news %></h4>
               <div class="news-content news-detai">
-                <%= news.content %>
+                <%= strip_tags(news.content)[0, 110] rescue "暂无内容" %>
               </div>
             </div>
           </div>
